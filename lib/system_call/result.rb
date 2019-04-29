@@ -28,15 +28,6 @@ module SystemCall
     end
 
     ##
-    # Indicates whether the command has been executed successfully.
-    #
-    # @raise [NotCalledError] Raises when the command has not yet been called.
-    # @return [Boolean]
-    def success?
-      exit_status.success?
-    end
-
-    ##
     # Gets the exit code of the process.
     #
     # @return [Integer]
@@ -45,10 +36,17 @@ module SystemCall
     end
 
     ##
+    # Indicates whether the command has been executed successfully.
+    #
+    # @return [Boolean]
+    def success?
+      exit_status.success?
+    end
+
+    ##
     # Indicates whether the command has not been executed successfully.
     #
-    # @raise [RuntimeError] Raises when the command has not yet been called.
-    # @return [true, false]
+    # @return [Boolean]
     def error?
       !success?
     end
@@ -58,7 +56,6 @@ module SystemCall
     #
     # @return [String] Returns result from {#success_result} when command exited
     #   successfully. Otherwise returns result from {#error_result}.
-    # @raise [RuntimeError] Raises when the command has not yet been called.
     def result
       success? ? success_result : error_result
     end
