@@ -33,16 +33,12 @@ module SystemCall
     #
     # @return [Result]
     def call
-      result = nil
-
       Open3.popen3(*args) do |_, stdout, stderr, wait_thr|
         success_result = readlines(stdout)
         error_result = readlines(stderr)
         exit_status = wait_thr.value
-        result = Result.new(exit_status, success_result, error_result)
+        Result.new(exit_status, success_result, error_result)
       end
-
-      result
     end
 
     private
