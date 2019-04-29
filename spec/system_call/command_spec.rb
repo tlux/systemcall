@@ -53,8 +53,8 @@ describe SystemCall::Command do
       let(:error_result) { "error 1\nerror 2" }
 
       before do
-        success_io = build_mock_io(success_result)
-        error_io = build_mock_io(error_result)
+        success_io = build_mock_io("#{success_result}\n")
+        error_io = build_mock_io("#{error_result}\n")
         wait_thr = double('wait thread', value: exit_status)
 
         allow(Open3)
