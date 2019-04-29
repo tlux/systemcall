@@ -1,5 +1,7 @@
 # System Call
 
+[![Build Status](https://travis-ci.org/tlux/systemcall.svg?branch=master)](https://travis-ci.org/tlux/systemcall)
+
 A simple wrapper around Ruby's Open3 to call CLI programs and process their
 output
 
