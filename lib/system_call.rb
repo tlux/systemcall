@@ -9,14 +9,21 @@ module SystemCall
   autoload :Command, 'system_call/command'
   autoload :Result, 'system_call/result'
 
-  module_function
+  ##
+  # Initializes and calls a {Command}, then returns the {Result}.
+  #
+  # @param args [Array] The command line arguments.
+  # @return [Result]
+  def self.call(*args)
+    Command.call(*args)
+  end
 
   ##
   # Initializes and calls a {Command}, then returns the {Result}.
   #
   # @param args [Array] The command line arguments.
   # @return [Result]
-  def call(*args)
+  def system_call(*args)
     Command.call(*args)
   end
 end

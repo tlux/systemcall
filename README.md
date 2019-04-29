@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/tlux/systemcall.svg?branch=master)](https://travis-ci.org/tlux/systemcall)
 
 A simple wrapper around Ruby's Open3 to call CLI programs and process their
-output
+output.
 
 ## Installation
 
@@ -23,7 +23,57 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Functional
+
+To run a CLI program use the following method:
+
+```ruby
+SystemCall.call('which', 'bash')
+SystemCall.call(['which', 'bash'])
+# => #<SystemCall::Result ...>
+```
+
+A command that has been executed returns a result object. When the command has
+run successfully, the result may look like so:
+
+```ruby
+result = SystemCall.call('which', 'bash')
+result.exit_code # => 0
+result.success? # => true
+result.error? # => false
+result.success_result # => "/bin/bash"
+result.error_result # => ""
+result.result # => "/bin/bash"
+```
+
+When the command failed, it may look like this:
+
+```ruby
+result = SystemCall.call('which', 'unknown')
+result.exit_code # => 1
+result.success? # => false
+result.error? # => true
+```
+
+In critical cases, the method may also raise:
+
+```ruby
+SystemCall.call('unknown')
+# ** (Errno::ENOENT) No such file or directory - unknown
+```
+
+### Mixin
+
+Alternatively, you can include the `SystemCall` module directly in your classes
+or modules. The included method name is `system_call` but the API is the same as
+for `SystemCall.call`.
+
+```ruby
+include SystemCall
+
+system_call('which', 'bash')
+system_call(['which', 'bash'])
+```
 
 ## Development
 
