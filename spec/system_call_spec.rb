@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe SystemCall do
   describe '::VERSION' do
     it 'is defined' do
