@@ -65,18 +65,45 @@ describe SystemCall::Result do
   end
 
   describe '#result' do
-    it 'returns #success_result when #success? is true'
+    it 'returns #success_result when #success? is true' do
+      allow(subject).to receive(:success?).and_return(true)
 
-    it 'returns #error_result when #success? is false'
+      expect(subject.result).to be success_result
+    end
+
+    it 'returns #error_result when #success? is false' do
+      allow(subject).to receive(:success?).and_return(false)
+
+      expect(subject.result).to be error_result
+    end
   end
 
   describe '#to_s' do
-    it 'is an alias for #result'
+    it 'is an alias for #result' do
+      expect(subject.method(:to_s)).to eq subject.method(:result)
+    end
   end
 
   describe '#<=>' do
-    it 'is nil when other object is nil'
+    before do
+      allow(subject).to receive(:result).and_return('b')
+    end
 
-    it 'compares result with #to_s of other object'
+    it 'is nil when other object is nil' do
+      expect(subject <=> nil).to be_nil
+    end
+
+    it 'compares result with other String' do
+      expect(subject <=> 'a').to eq(1)
+      expect(subject <=> 'b').to eq(0)
+      expect(subject <=> 'c').to eq(-1)
+    end
+
+    it 'compares result with #to_s of other object' do
+      { 'a' => 1, 'b' => 0, 'c' => -1 }.each do |char, value|
+        other = double('other', to_s: char)
+        expect(subject <=> other).to eq(value)
+      end
+    end
   end
 end
