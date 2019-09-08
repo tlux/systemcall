@@ -1,6 +1,7 @@
 # System Call
 
-[![Build Status](https://travis-ci.org/tlux/systemcall.svg?branch=master)](https://travis-ci.org/tlux/systemcall) 
+[![Build Status](https://travis-ci.org/tlux/systemcall.svg?branch=master)](https://travis-ci.org/tlux/systemcall)
+[![Coverage Status](https://coveralls.io/repos/github/tlux/systemcall/badge.svg?branch=master)](https://coveralls.io/github/tlux/systemcall?branch=master)
 [![Gem Version](https://badge.fury.io/rb/systemcall.svg)](https://badge.fury.io/rb/systemcall)
 
 A simple wrapper around Ruby's Open3 to call CLI programs and process their
